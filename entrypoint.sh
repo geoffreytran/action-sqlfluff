@@ -109,6 +109,13 @@ if [[ "${SQLFLUFF_COMMAND:?}" == "lint" ]]; then
 
 # Format changed files if the mode is fix
 elif [[ "${SQLFLUFF_COMMAND}" == "fix" ]]; then
+
+  echo '::group:: Running sqlfluff 🐶 ...'
+  set +Eeuo pipefail
+  dbt run 
+  set -Eeuo pipefail
+  echo '::endgroup::'
+  
   echo '::group:: Running sqlfluff 🐶 ...'
   # Allow failures now, as reviewdog handles them
   set +Eeuo pipefail
